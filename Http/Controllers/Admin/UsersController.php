@@ -5,14 +5,23 @@ use Pingpong\Modules\Routing\Controller;
 use Pingpong\Cms\User\Repositories\UserRepository;
 
 class UsersController extends Controller {
-	
+
+	/**
+	 * @var UserRepository
+     */
 	protected $repository;
 
+	/**
+	 * @param UserRepository $repository
+     */
 	public function __construct(UserRepository $repository)
 	{
 		$this->repository = $repository;
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+     */
 	public function index()
 	{
 		$users = $this->repository->paginate(config('user.perpage', 12));
@@ -21,12 +30,19 @@ class UsersController extends Controller {
 
 		return view('user::admin.index', compact('users', 'no'));
 	}
-	
+
+	/**
+	 * @return \Illuminate\View\View
+     */
 	public function create()
 	{
 		return view('user::admin.create');
 	}
 
+	/**
+	 * @param Request $request
+	 * @return \Illuminate\Http\RedirectResponse
+     */
 	public function store(Request $request)
 	{
 		$data = $request->all();
@@ -36,6 +52,10 @@ class UsersController extends Controller {
 		return redirect()->route('admin.users.show', $user->id);
 	}
 
+	/**
+	 * @param $id
+	 * @return \Illuminate\View\View
+     */
 	public function edit($id)
 	{
 		$user = $this->repository->find($id);
@@ -43,6 +63,11 @@ class UsersController extends Controller {
 		return view('user::admin.edit', compact('id', 'user'));
 	}
 
+	/**
+	 * @param Request $request
+	 * @param $id
+	 * @return \Illuminate\Http\RedirectResponse
+     */
 	public function update(Request $request, $id)
 	{
 		$user = $this->repository->find($id);
@@ -54,6 +79,10 @@ class UsersController extends Controller {
 		return redirect()->route('admin.users.show', $id);
 	}
 
+	/**
+	 * @param $id
+	 * @return \Illuminate\View\View
+     */
 	public function show($id)
 	{
 		$user = $this->repository->find($id);
@@ -61,6 +90,10 @@ class UsersController extends Controller {
 		return view('user::admin.show', compact('id', 'user'));		
 	}
 
+	/**
+	 * @param $id
+	 * @return \Illuminate\Http\RedirectResponse
+     */
 	public function destroy($id)
 	{
 		$user = $this->repository->delete($id);
