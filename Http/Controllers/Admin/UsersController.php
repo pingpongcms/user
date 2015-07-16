@@ -4,100 +4,100 @@ use Illuminate\Http\Request;
 use Pingpong\Modules\Routing\Controller;
 use Pingpong\Cms\User\Repositories\UserRepository;
 
-class UsersController extends Controller {
-
-	/**
-	 * @var UserRepository
+class UsersController extends Controller
+{
+    /**
+     * @var UserRepository
      */
-	protected $repository;
+    protected $repository;
 
-	/**
-	 * @param UserRepository $repository
+    /**
+     * @param UserRepository $repository
      */
-	public function __construct(UserRepository $repository)
-	{
-		$this->repository = $repository;
-	}
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
 
-	/**
-	 * @return \Illuminate\View\View
+    /**
+     * @return \Illuminate\View\View
      */
-	public function index()
-	{
-		$users = $this->repository->paginate(config('user.perpage', 12));
+    public function index()
+    {
+        $users = $this->repository->paginate(config('user.perpage', 12));
 
-		$no = $users->firstItem();
+        $no = $users->firstItem();
 
-		return view('user::admin.index', compact('users', 'no'));
-	}
+        return view('user::admin.index', compact('users', 'no'));
+    }
 
-	/**
-	 * @return \Illuminate\View\View
+    /**
+     * @return \Illuminate\View\View
      */
-	public function create()
-	{
-		return view('user::admin.create');
-	}
+    public function create()
+    {
+        return view('user::admin.create');
+    }
 
-	/**
-	 * @param Request $request
-	 * @return \Illuminate\Http\RedirectResponse
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-	public function store(Request $request)
-	{
-		$data = $request->all();
+    public function store(Request $request)
+    {
+        $data = $request->all();
 
-		$user = $this->repository->create($data);
-		
-		return redirect()->route('admin.users.show', $user->id);
-	}
+        $user = $this->repository->create($data);
 
-	/**
-	 * @param $id
-	 * @return \Illuminate\View\View
+        return redirect()->route('admin.users.show', $user->id);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\View\View
      */
-	public function edit($id)
-	{
-		$user = $this->repository->find($id);
+    public function edit($id)
+    {
+        $user = $this->repository->find($id);
 
-		return view('user::admin.edit', compact('id', 'user'));
-	}
+        return view('user::admin.edit', compact('id', 'user'));
+    }
 
-	/**
-	 * @param Request $request
-	 * @param $id
-	 * @return \Illuminate\Http\RedirectResponse
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-	public function update(Request $request, $id)
-	{
-		$user = $this->repository->find($id);
-		
-		$data = $request->all();
+    public function update(Request $request, $id)
+    {
+        $user = $this->repository->find($id);
 
-		$user->update($data);
-		
-		return redirect()->route('admin.users.show', $id);
-	}
+        $data = $request->all();
 
-	/**
-	 * @param $id
-	 * @return \Illuminate\View\View
+        $user->update($data);
+
+        return redirect()->route('admin.users.show', $id);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\View\View
      */
-	public function show($id)
-	{
-		$user = $this->repository->find($id);
+    public function show($id)
+    {
+        $user = $this->repository->find($id);
 
-		return view('user::admin.show', compact('id', 'user'));		
-	}
+        return view('user::admin.show', compact('id', 'user'));
+    }
 
-	/**
-	 * @param $id
-	 * @return \Illuminate\Http\RedirectResponse
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-	public function destroy($id)
-	{
-		$user = $this->repository->delete($id);
+    public function destroy($id)
+    {
+        $user = $this->repository->delete($id);
 
-		return redirect()->route('admin.users.index');
-	}
+        return redirect()->route('admin.users.index');
+    }
 }

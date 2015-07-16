@@ -8,8 +8,8 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 class EloquentUserRepository extends BaseRepository implements UserRepository
 {
-	public function model()
-	{
-		return User::class;
-	}
+    public function model()
+    {
+        return User::class;
+    }
 }

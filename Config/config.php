@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'perpage' => 12
+    'perpage' => 12
 ];
