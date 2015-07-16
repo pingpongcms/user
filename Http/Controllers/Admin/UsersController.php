@@ -15,7 +15,7 @@ class UsersController extends Controller {
 
 	public function index()
 	{
-		$users = $this->repository->paginate(12);
+		$users = $this->repository->paginate(config('user.perpage', 12));
 
 		$no = $users->firstItem();
 

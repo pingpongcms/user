@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'name' => 'User'
+	'perpage' => 12
 ];
