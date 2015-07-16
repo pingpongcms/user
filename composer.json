@@ -1,15 +1,18 @@
 {
-	"name": "pingpongcms/user",
-	"description": "",
-	"authors": [
-		{
-			"name": "Pingpong Labs",
-			"email": "pingpong.labs@gmail.com"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"Pingpong\\Cms\\User\\": ""
-		}
-	}
+  "name": "pingpongcms/user",
+  "description": "",
+  "authors": [
+    {
+      "name": "Pingpong Labs",
+      "email": "pingpong.labs@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Pingpong\\Cms\\User\\": ""
+    }
+  },
+  "require": {
+    "prettus/l5-repository": "2.0.*"
+  }
 }
