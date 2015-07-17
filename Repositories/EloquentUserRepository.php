@@ -12,6 +12,6 @@ class EloquentUserRepository extends BaseRepository implements UserRepository
      */
     public function model()
     {
-        return User::class;
+        return config('user.model', User::class);
     }
 }
