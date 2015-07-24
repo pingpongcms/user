@@ -14,6 +14,10 @@
 					<i class="fa fa-chevron-left"></i>
 					Back
 				</a>
+				<a class="btn-box-tool" href="{{ route('admin.users.edit', $user->id) }}">
+					<i class="fa fa-edit"></i>
+					Edit
+				</a>
 			</div>
 		</div>
 		<table class="table table-bordered">
