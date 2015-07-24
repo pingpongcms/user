@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Pingpong\Modules\Routing\Controller;
 use Pingpong\Cms\User\Repositories\UserRepository;
+use Pingpong\Cms\User\Http\Requests\Admin\Create;
+use Pingpong\Cms\User\Http\Requests\Admin\Update;
 
 class UsersController extends Controller
 {
@@ -43,7 +45,7 @@ class UsersController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Create $request)
     {
         $data = $request->all();
 
@@ -68,7 +70,7 @@ class UsersController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Update $request, $id)
     {
         $user = $this->repository->find($id);
 
